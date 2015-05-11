@@ -14,3 +14,7 @@
 $app->get('/', function() use ($app) {
     return $app->welcome();
 });
+
+$app->get('status', function () {
+	response()->json(['code' => 200, 'message' => 'ok']);
+});

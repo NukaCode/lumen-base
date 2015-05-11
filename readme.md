@@ -2,6 +2,7 @@
 
 - Facades, Eloquent and DotEnv are enabled.  Comment the lines in `bootstrap/app.php` out if you don't need them.
 - Configs folder added.  If you want to add a config file, look to [Lumen Docs](http://lumen.laravel.com/docs/configuration#configuration-files).
+- `app/Http/routes.php` contains a `/status` route that will return a 200 response with JSON "ok".
 
 # Models
 
