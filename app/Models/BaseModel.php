@@ -4,9 +4,6 @@ use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 use App\Support\Collection;
 
-/**
- * @property string $uniqueId
- */
 abstract class BaseModel extends Model {
 
 	/**
