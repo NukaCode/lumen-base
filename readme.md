@@ -1,21 +1,36 @@
-## Lumen PHP Framework
+# General Lumen changes
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+- Facades, Eloquent and DotEnv are enabled.  Comment the lines in `bootstrap/app.php` out if you don't need them.
+- Configs folder added.  If you want to add a config file, look to [Lumen Docs](http://lumen.laravel.com/docs/configuration#configuration-files).
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Models
 
-## Official Documentation
+- All models return collections as an instance of `App\Support\Collection`.
+- All models can now tap `->hashId` to get a hashed version of it's id.
+- All models now have `findHash()`.  This works the same as `find()` but expects the hashed id.
+- All models are expected to set a `HASH_ID` constant.  This will be the models salt.
+    - This is checked in the `BaseModel` constructor and will throw an exception if it's not found.
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+# Transformers
 
-## Security Vulnerabilities
+- Docs: [Fractal](http://fractal.thephpleague.com/transformers/)
+- Example Class
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```
 
-### License
+    <?php namespace App\Transformers;
+    
+    use App\Models\Video;
+    
+    class VideoTransformer extends BaseTransformer {
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+	public function transform(Video $video)
+	{
+		return [
+			'id' => $video->hashId
+		];
+	}
+
+    }
+```
+
