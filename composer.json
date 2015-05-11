@@ -1,6 +1,6 @@
 {
-  "name": "laravel/lumen",
-  "description": "The Laravel Lumen Framework.",
+  "name": "nukacode/lumen-base",
+  "description": "The Laravel Lumen Framework with nukacode.",
   "keywords": [
     "framework",
     "laravel",
