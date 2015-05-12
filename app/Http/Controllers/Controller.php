@@ -7,23 +7,22 @@ use League\Fractal\Manager;
 
 class Controller extends BaseController
 {
-    
-    /**
-     * @var Manager
-     */
+
+    /* @var Manager */
     protected $fractal;
 
     public function __construct()
     {
         $this->fractal = new Manager();
 
+        // Grab any includes from the request.
         if (isset($_GET['include'])) {
             $this->fractal->parseIncludes($_GET['include']);
         }
     }
 
     /**
-     * Create the response for when a request fails validation.
+     * Overload the ValidatesRequests method to format the errors for JSON consumption.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  array                    $errors
